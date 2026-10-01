@@ -1,0 +1,22 @@
+# Deploy with Hostinger Docker Manager (see README) or `docker compose up -d --build`.
+services:
+  bot:
+    # Builds straight from the GitHub repo (default branch), so this file works on its own.
+    build: https://github.com/DWEEJ-LIMBACHIYA/Telegram-bot.git
+    restart: unless-stopped          # comes back after crashes and server reboots
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}                              # from @BotFather (keep secret!)
+      ALLOWED_USER_IDS: ${ALLOWED_USER_IDS:-}              # e.g. 123456789,987654321
+      DEFAULT_TIMEZONE: ${DEFAULT_TIMEZONE:-America/Toronto}
+      NIGHTLY_TIME: ${NIGHTLY_TIME:-21:00}
+      REMINDER_MINUTES: ${REMINDER_MINUTES:-30}
+    volumes:
+      - bot-data:/app/data           # the database survives restarts and rebuilds
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
+
+volumes:
+  bot-data:
