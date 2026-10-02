@@ -68,6 +68,18 @@ docker compose logs -f                 # watch it run (Ctrl+C to stop watching)
 To update later: `git pull && docker compose up -d --build`.
 </details>
 
+### Or: run it on an Android tablet/phone (free)
+1. Install **F-Droid** (f-droid.org), then from F-Droid install **Termux** and **Termux:Boot**. Don't use the Play Store version of Termux, which is outdated.
+2. Open Termux:Boot once, so that it can start the bot after a reboot.
+3. In Termux, paste:
+   ```
+   curl -fsSL https://raw.githubusercontent.com/DWEEJ-LIMBACHIYA/Telegram-bot/ccr-44d08e53-me2vwx/termux/install.sh | bash
+   ```
+   It asks for your bot token, your user ID and your timezone, then starts the bot.
+4. In Android **Settings → Apps → Termux → Battery**, choose **Unrestricted**. Keep the tablet plugged in and on Wi-Fi.
+
+Logs: `tail -f ~/Telegram-bot/data/bot.log` · Stop: `bash ~/Telegram-bot/termux/stop.sh` · Update: `bash ~/Telegram-bot/termux/update.sh`
+
 ### Important rules
 - **Run only one copy of the bot per token.** If it runs on your laptop and on the VPS at the same time, Telegram reports `409 Conflict`. For testing, create a second bot with BotFather.
 - **Never commit the token.** `.env` is already in `.gitignore`.
